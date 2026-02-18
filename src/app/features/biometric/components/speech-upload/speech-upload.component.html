@@ -1,0 +1,149 @@
+<div class="upload-container">
+  <div class="upload-header">
+    <div class="upload-icon">
+      <svg width="48" height="48" fill="none" stroke="#00A758" stroke-width="1.5">
+        <path d="M24 8v20M24 28c-4 0-8-3-8-7V14c0-4 4-7 8-7s8 3 8 7v7c0 4-4 7-8 7z"/>
+        <path d="M16 32v4h16v-4"/>
+        <path d="M24 36v4"/>
+      </svg>
+    </div>
+    <h3 class="upload-title">Upload Speech Audio</h3>
+    <p class="upload-description">Please upload or record audio for voice recognition</p>
+    <p class="upload-hint">Max file size: 1 MB | Max recording: 30 seconds</p>
+  </div>
+
+  <!-- Mode Toggle -->
+  <div class="mode-toggle">
+    <button 
+      class="mode-btn" 
+      [class.active]="!recordMode" 
+      (click)="setMode(false)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="12" height="12" rx="2"/>
+        <path d="M7 8h4M7 11h2"/>
+      </svg>
+      Upload
+    </button>
+    <button 
+      class="mode-btn" 
+      [class.active]="recordMode" 
+      (click)="setMode(true)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="9" cy="9" r="6"/>
+        <circle cx="9" cy="9" r="3" fill="currentColor"/>
+      </svg>
+      Record
+    </button>
+  </div>
+
+  <!-- File Size Error -->
+  <div *ngIf="fileSizeError" class="error-message">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="8" cy="8" r="7"/>
+      <path d="M8 4v4M8 10v1"/>
+    </svg>
+    {{ fileSizeError }}
+  </div>
+
+  <div class="upload-area" [class.has-file]="selectedFile" [class.recording]="isRecording" [class.has-error]="fileSizeError">
+    <!-- File Upload Mode -->
+    <label *ngIf="!selectedFile && !recordMode" class="upload-label">
+      <input 
+        type="file" 
+        (change)="onFileChange($event)" 
+        accept="audio/*"
+        class="file-input"
+      />
+      <div class="upload-placeholder">
+        <svg width="32" height="32" fill="none" stroke="#888" stroke-width="1.5">
+          <path d="M16 8v16M8 16h16"/>
+          <rect x="4" y="4" width="24" height="24" rx="6"/>
+        </svg>
+        <span>Click to select audio file</span>
+      </div>
+    </label>
+
+    <!-- Recording Mode - Not Recording -->
+    <div *ngIf="recordMode && !isRecording && !selectedFile" class="record-start">
+      <button class="start-record-btn" (click)="startRecording()">
+        <div class="mic-icon">
+          <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 6v16M20 22c-3 0-6-2.5-6-5.5V12c0-3 3-5.5 6-5.5s6 2.5 6 5.5v4.5c0 3-3 5.5-6 5.5z"/>
+            <path d="M14 26v2h12v-2"/>
+            <path d="M20 28v4"/>
+          </svg>
+        </div>
+        <span>Tap to Start Recording</span>
+      </button>
+    </div>
+
+    <!-- Recording Mode - Recording Active -->
+    <div *ngIf="recordMode && isRecording" class="recording-active">
+      <div class="recording-indicator">
+        <div class="pulse-ring"></div>
+        <div class="pulse-ring delay-1"></div>
+        <div class="pulse-ring delay-2"></div>
+        <div class="mic-recording">
+          <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2">
+            <path d="M16 4v12M16 16c-2.5 0-4.5-2-4.5-4V8.5c0-2 2-4 4.5-4s4.5 2 4.5 4V12c0 2-2 4-4.5 4z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="recording-time">{{ recordingTimeFormatted }}</div>
+      <div class="recording-hint">Recording... (max 30s)</div>
+    </div>
+
+    <!-- File/Recording Selected -->
+    <div *ngIf="selectedFile && !isRecording" class="file-selected">
+      <div class="audio-icon">
+        <svg width="40" height="40" fill="none" stroke="#00A758" stroke-width="1.5">
+          <path d="M20 8v16"/>
+          <path d="M12 14v4"/>
+          <path d="M28 14v4"/>
+          <path d="M16 10v12"/>
+          <path d="M24 10v12"/>
+          <rect x="4" y="4" width="32" height="32" rx="8"/>
+        </svg>
+      </div>
+      <div class="file-details">
+        <span class="file-name">{{ selectedFile.name }}</span>
+        <span class="file-size">{{ fileSizeFormatted }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop Recording Button -->
+  <button 
+    *ngIf="isRecording" 
+    class="stop-record-btn" 
+    (click)="stopRecording()">
+    <svg width="20" height="20" fill="currentColor">
+      <rect x="4" y="4" width="12" height="12" rx="2"/>
+    </svg>
+    Stop Recording
+  </button>
+
+  <!-- File Actions -->
+  <div *ngIf="selectedFile && !isRecording" class="file-actions">
+    <button *ngIf="recordMode" class="change-file" (click)="reRecord()">Re-record</button>
+    <label *ngIf="!recordMode" class="change-file">
+      <input 
+        type="file" 
+        (change)="onFileChange($event)" 
+        accept="audio/*"
+        class="file-input"
+      />
+      Change File
+    </label>
+  </div>
+
+  <button 
+    *ngIf="!isRecording"
+    (click)="onUpload()" 
+    [disabled]="loading || !hasFile"
+    class="upload-btn"
+  >
+    <span *ngIf="loading" class="btn-spinner"></span>
+    {{ loading ? 'Processing...' : 'Upload Speech' }}
+  </button>
+</div>

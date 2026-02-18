@@ -1,0 +1,122 @@
+.form-group {
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f4f6f5;
+  border-radius: 28px;
+  box-shadow: 0 2px 8px 0 rgba(0, 167, 88, 0.08) inset;
+  padding: 2px 0;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  height: 56px;
+}
+
+.input-wrapper:focus-within {
+  border-color: #00A758;
+  box-shadow: 0 0 0 3px rgba(0, 167, 88, 0.15);
+  background: #fff;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-left: 6px;
+  margin-right: 2px;
+  opacity: 0.85;
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 1.12rem;
+  padding: 13px 12px;
+  border-radius: 28px;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  color: #222;
+  font-weight: 500;
+  outline: none;
+  height: 52px;
+}
+
+.input-wrapper input::placeholder {
+  color: #8a8a8a;
+  font-weight: 500;
+}
+
+.input-wrapper input.error {
+  color: #e53935;
+}
+
+.error-message {
+  display: block;
+  font-size: 0.85rem;
+  color: #e53935;
+  margin-top: 6px;
+  padding-left: 16px;
+  font-weight: 500;
+}
+
+.submit-btn {
+  margin-top: 18px;
+  width: 100%;
+  height: 58px;
+  background: linear-gradient(135deg, #00A758, #007A43);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 167, 88, 0.35);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-btn:enabled:hover {
+  box-shadow: 0 16px 32px rgba(0, 167, 88, 0.45);
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  background: #e8f5ee;
+  color: #b2b2b2;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

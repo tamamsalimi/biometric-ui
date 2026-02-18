@@ -1,0 +1,137 @@
+.result-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.success-icon {
+  margin-bottom: 20px;
+  animation: scaleIn 0.4s ease-out;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.result-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+}
+
+.result-subtitle {
+  font-size: 1rem;
+  color: #00A758;
+  margin: 0 0 24px 0;
+  font-weight: 500;
+}
+
+.result-card {
+  width: 100%;
+  background: #f9fafa;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 16px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.transcript-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transcript-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.transcript-text {
+  font-family: 'Inter', 'SF Pro Display', monospace;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.verification-badges {
+  display: flex;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5ee;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: #00A758;
+  font-weight: 600;
+}
+
+.reset-btn {
+  width: 100%;
+  height: 58px;
+  background: linear-gradient(135deg, #00A758, #007A43);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 167, 88, 0.35);
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  box-shadow: 0 16px 32px rgba(0, 167, 88, 0.45);
+  transform: translateY(-2px);
+}

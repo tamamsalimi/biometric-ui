@@ -1,0 +1,73 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="code">User Code</label>
+    <div class="input-wrapper">
+      <span class="input-icon">
+        <svg width="24" height="24" fill="none" stroke="#00A758" stroke-width="1.5">
+          <rect x="4" y="4" width="16" height="16" rx="6"/>
+          <path d="M10 10h4v4h-4z"/>
+        </svg>
+      </span>
+      <input 
+        id="code"
+        formControlName="code" 
+        type="text" 
+        placeholder="Enter user code"
+        [class.error]="hasError('code', 'required') || hasError('code', 'minlength')"
+      />
+    </div>
+    <span *ngIf="hasError('code', 'required')" class="error-message">User code is required</span>
+    <span *ngIf="hasError('code', 'minlength')" class="error-message">User code must be at least 2 characters</span>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <div class="input-wrapper">
+      <span class="input-icon">
+        <svg width="24" height="24" fill="none" stroke="#00A758" stroke-width="1.5">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-3.5 6-6 8-6s8 2.5 8 6"/>
+        </svg>
+      </span>
+      <input 
+        id="name"
+        formControlName="name" 
+        type="text" 
+        placeholder="Enter name"
+        [class.error]="hasError('name', 'required') || hasError('name', 'minlength')"
+      />
+    </div>
+    <span *ngIf="hasError('name', 'required')" class="error-message">Name is required</span>
+    <span *ngIf="hasError('name', 'minlength')" class="error-message">Name must be at least 2 characters</span>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <div class="input-wrapper">
+      <span class="input-icon">
+        <svg width="24" height="24" fill="none" stroke="#00A758" stroke-width="1.5">
+          <rect x="3" y="7" width="18" height="10" rx="4"/>
+          <path d="M3 7l9 7 9-7"/>
+        </svg>
+      </span>
+      <input 
+        id="email"
+        formControlName="email" 
+        type="email" 
+        placeholder="Enter email"
+        [class.error]="hasError('email', 'required') || hasError('email', 'email')"
+      />
+    </div>
+    <span *ngIf="hasError('email', 'required')" class="error-message">Email is required</span>
+    <span *ngIf="hasError('email', 'email')" class="error-message">Please enter a valid email</span>
+  </div>
+
+  <button 
+    type="submit" 
+    [disabled]="loading || !isFormValid"
+    class="submit-btn"
+  >
+    <span *ngIf="loading" class="btn-spinner"></span>
+    {{ loading ? 'Creating...' : 'Register Biometrics' }}
+  </button>
+</form>

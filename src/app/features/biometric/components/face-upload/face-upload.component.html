@@ -1,0 +1,121 @@
+<div class="upload-container">
+  <div class="upload-header">
+    <div class="upload-icon">
+      <svg width="48" height="48" fill="none" stroke="#00A758" stroke-width="1.5">
+        <circle cx="24" cy="20" r="8"/>
+        <path d="M12 40c0-6 8-10 12-10s12 4 12 10"/>
+        <rect x="4" y="4" width="40" height="40" rx="12"/>
+      </svg>
+    </div>
+    <h3 class="upload-title">Upload Face Image</h3>
+    <p class="upload-description">Please upload a clear front-facing photo for facial recognition</p>
+  </div>
+
+  <!-- Mode Toggle -->
+  <div class="mode-toggle">
+    <button 
+      class="mode-btn" 
+      [class.active]="!cameraMode" 
+      (click)="setMode(false)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="3" y="3" width="12" height="12" rx="2"/>
+        <path d="M3 12l3-3 2 2 4-4 3 3"/>
+      </svg>
+      Upload
+    </button>
+    <button 
+      class="mode-btn" 
+      [class.active]="cameraMode" 
+      (click)="setMode(true)">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5">
+        <rect x="2" y="4" width="14" height="10" rx="2"/>
+        <circle cx="9" cy="9" r="3"/>
+      </svg>
+      Camera
+    </button>
+  </div>
+
+  <div class="upload-area" [class.has-preview]="previewUrl" [class.camera-active]="cameraMode && cameraActive">
+    <!-- Preview Image -->
+    <div *ngIf="previewUrl && !cameraActive" class="preview-container">
+      <img [src]="previewUrl" alt="Face preview" class="preview-image" />
+    </div>
+
+    <!-- Camera View -->
+    <div *ngIf="cameraMode && cameraActive" class="camera-container">
+      <video #videoElement autoplay playsinline class="camera-video"></video>
+      <div class="camera-overlay">
+        <div class="face-guide"></div>
+      </div>
+    </div>
+    
+    <!-- File Upload -->
+    <label *ngIf="!previewUrl && !cameraMode" class="upload-label">
+      <input 
+        type="file" 
+        (change)="onFileChange($event)" 
+        accept="image/*"
+        class="file-input"
+      />
+      <div class="upload-placeholder">
+        <svg width="32" height="32" fill="none" stroke="#888" stroke-width="1.5">
+          <path d="M16 8v16M8 16h16"/>
+          <rect x="4" y="4" width="24" height="24" rx="6"/>
+        </svg>
+        <span>Click to select image</span>
+      </div>
+    </label>
+
+    <!-- Camera Start Button -->
+    <div *ngIf="cameraMode && !cameraActive && !previewUrl" class="camera-start">
+      <button class="start-camera-btn" (click)="startCamera()">
+        <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="4" y="8" width="24" height="16" rx="3"/>
+          <circle cx="16" cy="16" r="5"/>
+          <circle cx="16" cy="16" r="2"/>
+        </svg>
+        <span>Start Camera</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Camera Capture Button -->
+  <button 
+    *ngIf="cameraMode && cameraActive" 
+    class="capture-btn" 
+    (click)="capturePhoto()">
+    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="12" cy="12" r="6" fill="currentColor"/>
+    </svg>
+    Capture Photo
+  </button>
+
+  <div *ngIf="selectedFile && !cameraMode" class="file-info">
+    <span class="file-name">{{ selectedFile.name }}</span>
+    <label class="change-file">
+      <input 
+        type="file" 
+        (change)="onFileChange($event)" 
+        accept="image/*"
+        class="file-input"
+      />
+      Change
+    </label>
+  </div>
+
+  <div *ngIf="previewUrl && cameraMode && !cameraActive" class="file-info">
+    <span class="file-name">Captured photo</span>
+    <button class="change-file" (click)="retakePhoto()">Retake</button>
+  </div>
+
+  <button 
+    *ngIf="!cameraActive"
+    (click)="onUpload()" 
+    [disabled]="loading || !hasFile"
+    class="upload-btn"
+  >
+    <span *ngIf="loading" class="btn-spinner"></span>
+    {{ loading ? 'Uploading...' : 'Upload Face' }}
+  </button>
+</div>

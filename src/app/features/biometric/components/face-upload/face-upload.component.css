@@ -1,0 +1,309 @@
+.upload-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.upload-icon {
+  margin-bottom: 12px;
+}
+
+.upload-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+}
+
+.upload-description {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  font-weight: 500;
+}
+
+.upload-area {
+  width: 100%;
+  min-height: 200px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafa;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.upload-area:hover {
+  border-color: #00A758;
+  background: #f0faf5;
+}
+
+.upload-area.has-preview {
+  border-style: solid;
+  border-color: #00A758;
+  background: #fff;
+}
+
+.upload-label {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #888;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.preview-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  object-fit: contain;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  background: #f4f6f5;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #444;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  margin-right: 12px;
+}
+
+.change-file {
+  font-size: 0.9rem;
+  color: #00A758;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.change-file:hover {
+  text-decoration: underline;
+}
+
+.upload-btn {
+  width: 100%;
+  height: 58px;
+  background: linear-gradient(135deg, #00A758, #007A43);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 167, 88, 0.35);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.upload-btn:enabled:hover {
+  box-shadow: 0 16px 32px rgba(0, 167, 88, 0.45);
+  transform: translateY(-2px);
+}
+
+.upload-btn:disabled {
+  background: #e8f5ee;
+  color: #b2b2b2;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: #f4f6f5;
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  color: #00A758;
+}
+
+.mode-btn.active {
+  background: #fff;
+  color: #00A758;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Camera Styles */
+.camera-container {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.face-guide {
+  width: 140px;
+  height: 180px;
+  border: 2px dashed rgba(0, 167, 88, 0.6);
+  border-radius: 50% 50% 45% 45%;
+}
+
+.camera-start {
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-camera-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 32px;
+  border: none;
+  background: transparent;
+  color: #00A758;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.start-camera-btn:hover {
+  transform: scale(1.05);
+}
+
+.capture-btn {
+  width: 100%;
+  height: 52px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  background: #ff4757;
+  color: #fff;
+  border: none;
+  border-radius: 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(255, 71, 87, 0.35);
+  transition: all 0.2s ease;
+}
+
+.capture-btn:hover {
+  box-shadow: 0 12px 28px rgba(255, 71, 87, 0.45);
+  transform: translateY(-2px);
+}
+
+.upload-area.camera-active {
+  border-style: solid;
+  border-color: #00A758;
+  background: #000;
+  min-height: 240px;
+}

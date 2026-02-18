@@ -1,0 +1,375 @@
+.upload-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.upload-icon {
+  margin-bottom: 12px;
+}
+
+.upload-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+}
+
+.upload-description {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0;
+  font-weight: 500;
+}
+
+.upload-hint {
+  font-size: 0.8rem;
+  color: #999;
+  margin: 8px 0 0 0;
+  font-weight: 400;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 14px;
+  background: #fff5f5;
+  border: 1px solid #ff4757;
+  border-radius: 10px;
+  color: #ff4757;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.upload-area {
+  width: 100%;
+  min-height: 160px;
+  border: 2px dashed #e0e0e0;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafa;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+}
+
+.upload-area:hover {
+  border-color: #00A758;
+  background: #f0faf5;
+}
+
+.upload-area.has-file {
+  border-style: solid;
+  border-color: #00A758;
+  background: #f0faf5;
+}
+
+.upload-area.has-error {
+  border-color: #ff4757;
+  background: #fff5f5;
+}
+
+.upload-label {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #888;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.file-selected {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.audio-icon {
+  flex-shrink: 0;
+}
+
+.file-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.file-name {
+  font-size: 1rem;
+  color: #1a1a1a;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.file-size {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.file-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.change-file {
+  font-size: 0.95rem;
+  color: #00A758;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.change-file:hover {
+  text-decoration: underline;
+}
+
+.upload-btn {
+  width: 100%;
+  height: 58px;
+  background: linear-gradient(135deg, #00A758, #007A43);
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  font-size: 1.18rem;
+  font-weight: 600;
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 167, 88, 0.35);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.upload-btn:enabled:hover {
+  box-shadow: 0 16px 32px rgba(0, 167, 88, 0.45);
+  transform: translateY(-2px);
+}
+
+.upload-btn:disabled {
+  background: #e8f5ee;
+  color: #b2b2b2;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btn-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mode Toggle */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  background: #f4f6f5;
+  padding: 4px;
+  border-radius: 12px;
+  width: 100%;
+}
+
+.mode-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-btn:hover {
+  color: #00A758;
+}
+
+.mode-btn.active {
+  background: #fff;
+  color: #00A758;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Recording Styles */
+.record-start {
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-record-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 32px;
+  border: none;
+  background: transparent;
+  color: #00A758;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.start-record-btn:hover {
+  transform: scale(1.05);
+}
+
+.mic-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f0faf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recording-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.recording-indicator {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pulse-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 71, 87, 0.2);
+  animation: pulse 1.5s ease-out infinite;
+}
+
+.pulse-ring.delay-1 {
+  animation-delay: 0.3s;
+}
+
+.pulse-ring.delay-2 {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.mic-recording {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ff4757;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.recording-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ff4757;
+  font-family: 'SF Mono', 'Monaco', monospace;
+}
+
+.recording-hint {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.upload-area.recording {
+  border-style: solid;
+  border-color: #ff4757;
+  background: #fff5f6;
+}
+
+.stop-record-btn {
+  width: 100%;
+  height: 52px;
+  margin-bottom: 12px;
+  background: #ff4757;
+  color: #fff;
+  border: none;
+  border-radius: 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(255, 71, 87, 0.35);
+  transition: all 0.2s ease;
+}
+
+.stop-record-btn:hover {
+  box-shadow: 0 12px 28px rgba(255, 71, 87, 0.45);
+  transform: translateY(-2px);
+}

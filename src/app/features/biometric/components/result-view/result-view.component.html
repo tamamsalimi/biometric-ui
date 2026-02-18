@@ -1,0 +1,57 @@
+<div class="result-container">
+  <div class="success-icon">
+    <svg width="64" height="64" fill="none" stroke="#00A758" stroke-width="2">
+      <circle cx="32" cy="32" r="28" fill="#e8f5ee"/>
+      <path d="M20 32l8 8 16-16" stroke="#00A758" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <h3 class="result-title">Registration Complete!</h3>
+  <p class="result-subtitle">Biometric verification has been successfully recorded</p>
+
+  <div class="result-card" *ngIf="employee">
+    <h4 class="card-title">Employee Information</h4>
+    <div class="info-row">
+      <span class="info-label">User Code:</span>
+      <span class="info-value">{{ employee.code }}</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Name:</span>
+      <span class="info-value">{{ employee.name }}</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Email:</span>
+      <span class="info-value">{{ employee.email }}</span>
+    </div>
+  </div>
+
+  <div class="result-card" *ngIf="transcript">
+    <h4 class="card-title">Speech Recognition Result</h4>
+    <div class="transcript-content">
+      <span class="transcript-label">Transcript:</span>
+      <pre class="transcript-text">{{ transcript }}</pre>
+    </div>
+  </div>
+
+  <div class="verification-badges">
+    <div class="badge">
+      <svg width="24" height="24" fill="none" stroke="#00A758" stroke-width="1.5">
+        <circle cx="12" cy="10" r="4"/>
+        <path d="M6 20c0-3 4-5 6-5s6 2 6 5"/>
+        <rect x="2" y="2" width="20" height="20" rx="6"/>
+      </svg>
+      <span>Face Verified</span>
+    </div>
+    <div class="badge">
+      <svg width="24" height="24" fill="none" stroke="#00A758" stroke-width="1.5">
+        <path d="M12 4v10M12 14c-2 0-4-2-4-4V7c0-2 2-4 4-4s4 2 4 4v3c0 2-2 4-4 4z"/>
+        <path d="M8 18v2h8v-2"/>
+      </svg>
+      <span>Voice Verified</span>
+    </div>
+  </div>
+
+  <button (click)="onReset()" class="reset-btn">
+    Register Another User
+  </button>
+</div>

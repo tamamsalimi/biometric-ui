@@ -1,0 +1,155 @@
+<div class="biometric-bg">
+  <div class="bg-glow bg-glow-left"></div>
+  <div class="bg-glow bg-glow-right"></div>
+</div>
+
+<div class="biometric-container">
+  <div class="biometric-card">
+    <!-- Status Bar (Time + Weather) -->
+    <app-status-bar></app-status-bar>
+
+    <!-- Header -->
+    <h2 class="card-title">Biometric Registration</h2>
+    <p class="card-subtitle">Secure access using face and voice recognition</p>
+
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+      <div 
+        class="progress-step" 
+        [class.active]="currentStep >= RegistrationStep.EMPLOYEE"
+        [class.completed]="currentStep > RegistrationStep.EMPLOYEE">
+        <span class="step-number">1</span>
+        <span class="step-label">Registration</span>
+      </div>
+      <div class="progress-line" [class.active]="currentStep > RegistrationStep.EMPLOYEE"></div>
+      <div 
+        class="progress-step" 
+        [class.active]="currentStep >= RegistrationStep.FACE"
+        [class.completed]="currentStep > RegistrationStep.FACE">
+        <span class="step-number">2</span>
+        <span class="step-label">Face Recognition</span>
+      </div>
+      <div class="progress-line" [class.active]="currentStep > RegistrationStep.FACE"></div>
+      <div 
+        class="progress-step" 
+        [class.active]="currentStep >= RegistrationStep.SPEECH"
+        [class.completed]="currentStep > RegistrationStep.SPEECH">
+        <span class="step-number">3</span>
+        <span class="step-label">Voice Recording</span>
+      </div>
+      <div class="progress-line" [class.active]="currentStep > RegistrationStep.SPEECH"></div>
+      <div 
+        class="progress-step" 
+        [class.active]="currentStep >= RegistrationStep.COMPLETE">
+        <span class="step-number">4</span>
+        <span class="step-label">Complete</span>
+      </div>
+    </div>
+
+    <!-- Status Messages -->
+    <div *ngIf="errorMessage" class="message error-message">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="10" cy="10" r="8"/>
+        <path d="M10 6v4M10 14h.01"/>
+      </svg>
+      {{ errorMessage }}
+    </div>
+    <div *ngIf="successMessage" class="message success-message">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="10" cy="10" r="8"/>
+        <path d="M7 10l2 2 4-4"/>
+      </svg>
+      {{ successMessage }}
+    </div>
+
+    <!-- Step Content -->
+    <div class="step-content">
+      <!-- Step 1: Employee Form -->
+      <app-employee-form 
+        *ngIf="currentStep === RegistrationStep.EMPLOYEE"
+        [loading]="loading"
+        (submitEmployee)="onEmployeeSubmit($event)">
+      </app-employee-form>
+
+      <!-- Step 2: Face Upload -->
+      <app-face-upload 
+        *ngIf="currentStep === RegistrationStep.FACE"
+        [loading]="loading"
+        (fileSelected)="onFaceFileSelected($event)"
+        (uploadTriggered)="onFaceUpload()">
+      </app-face-upload>
+
+      <!-- Step 3: Speech Upload -->
+      <app-speech-upload 
+        *ngIf="currentStep === RegistrationStep.SPEECH"
+        [loading]="loading"
+        (fileSelected)="onSpeechFileSelected($event)"
+        (uploadTriggered)="onSpeechUpload()">
+      </app-speech-upload>
+
+      <!-- Step 4: Result -->
+      <app-result-view 
+        *ngIf="currentStep === RegistrationStep.COMPLETE"
+        [employee]="employee"
+        [transcript]="transcript"
+        (resetTriggered)="onReset()">
+      </app-result-view>
+    </div>
+
+    <!-- Info Footer -->
+    <div *ngIf="currentStep !== RegistrationStep.COMPLETE" class="info-footer">
+      <svg width="26" height="26" fill="none" stroke="#00A758" stroke-width="1.5">
+        <circle cx="13" cy="13" r="12"/>
+        <path d="M13 8v5l4 2"/>
+      </svg>
+      <span>Face and voice verification will be captured after registration</span>
+    </div>
+  </div>
+</div>
+
+<!-- Global Loading Overlay -->
+<app-loading-spinner 
+  [show]="loading" 
+  [overlay]="true" 
+  message="Processing...">
+</app-loading-spinner>
+
+<!-- Existing Employee Modal -->
+<div *ngIf="showExistingEmployeeModal" class="modal-overlay" (click)="closeExistingEmployeeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-icon">
+      <svg width="48" height="48" fill="none" stroke="#00A758" stroke-width="1.5">
+        <circle cx="24" cy="20" r="8"/>
+        <path d="M12 40c0-6 8-10 12-10s12 4 12 10"/>
+        <rect x="4" y="4" width="40" height="40" rx="12"/>
+      </svg>
+    </div>
+    <h3 class="modal-title">Employee Already Exists</h3>
+    <p class="modal-message">
+      An employee with code <strong>{{ existingEmployee?.code }}</strong> was found in the system.
+    </p>
+    <div class="modal-employee-info">
+      <div class="info-row">
+        <span class="info-label">Name:</span>
+        <span class="info-value">{{ existingEmployee?.name || '--' }}</span>
+      </div>
+      <div class="info-row">
+        <span class="info-label">Email:</span>
+        <span class="info-value">{{ existingEmployee?.email || '--' }}</span>
+      </div>
+      <div *ngIf="existingEmployee?.id" class="info-row">
+        <span class="info-label">Employee ID:</span>
+        <span class="info-value">{{ existingEmployee?.id }}</span>
+      </div>
+    </div>
+    <p class="modal-question">Do you want to proceed with this employee?</p>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" (click)="closeExistingEmployeeModal()">
+        Cancel
+      </button>
+      <button class="modal-btn modal-btn-confirm" (click)="confirmUseExistingEmployee()">
+        Yes, Proceed
+      </button>
+    </div>
+  </div>
+</div>
